@@ -7,16 +7,28 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Landing from "./pages/Landing";
+import Battle from "./pages/Battle";
+import { themeOptions } from "./theme";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-const theme = createTheme();
+const theme = createTheme(themeOptions);
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Navigate to="/start" />} />
+            <Route path="start" element={<Landing />} />
+            <Route path="battle/:battleId" element={<Battle />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>
 );
