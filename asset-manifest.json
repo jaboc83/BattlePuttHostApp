@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/BattlePuttHostApp/static/css/main.073c9b0a.css",
+    "main.js": "/BattlePuttHostApp/static/js/main.2954a3fd.js",
+    "static/js/787.2980826b.chunk.js": "/BattlePuttHostApp/static/js/787.2980826b.chunk.js",
+    "static/media/logo.svg": "/BattlePuttHostApp/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/BattlePuttHostApp/index.html",
+    "main.073c9b0a.css.map": "/BattlePuttHostApp/static/css/main.073c9b0a.css.map",
+    "main.2954a3fd.js.map": "/BattlePuttHostApp/static/js/main.2954a3fd.js.map",
+    "787.2980826b.chunk.js.map": "/BattlePuttHostApp/static/js/787.2980826b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.2954a3fd.js"
+  ]
+}
