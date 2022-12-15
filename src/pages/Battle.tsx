@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Paper, Typography } from '@mui/material';
+import { Box, Button, Grid, Paper, Skeleton, Typography } from '@mui/material';
 import * as React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Game } from '../api';
@@ -40,26 +40,44 @@ const Battle = () => {
           justifyContent="center"
           sx={{ my: 1, pb: 2 }}
         >
-          {games.map(g => (
-            <Grid
-              item
-              sm={2}
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-            >
-              <Button
-                key={g.id}
-                variant="contained"
-                sx={{ height: '5rem', width: '8rem' }}
-                onClick={() => {
-                  navigate(`${game}/${g.slug}/${generateNewCode(4)}`);
-                }}
-              >
-                {g.name}
-              </Button>
-            </Grid>
-          ))}
+          {games.length > 0
+            ? games.map(g => (
+                <Grid
+                  item
+                  sm={2}
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <Button
+                    key={g.id}
+                    variant="contained"
+                    sx={{ height: '5rem', width: '8rem' }}
+                    onClick={() => {
+                      navigate(`${game}/${g.slug}/${generateNewCode(4)}`);
+                    }}
+                  >
+                    {g.name}
+                  </Button>
+                </Grid>
+              ))
+            : Array.from(Array(8).keys())
+                .map(x => x + 1)
+                .map(g => (
+                  <Grid
+                    item
+                    sm={2}
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <Skeleton
+                      variant="rectangular"
+                      width="12rem"
+                      height="5rem"
+                    />
+                  </Grid>
+                ))}
         </Grid>
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}></Box>
       </Paper>
