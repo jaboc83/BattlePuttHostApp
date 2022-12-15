@@ -1,16 +1,18 @@
 import { Box, Button, Grid, Paper, Skeleton, Typography } from '@mui/material';
 import * as React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Game } from '../api';
+import { Game, Battle as BattleType } from '../api';
 import { game } from '../routes';
-import { useGame } from '../hooks';
-import { generateNewCode } from '../codeGenerator';
+import { useBattle, useGame, useMatch } from '../hooks';
 
 const Battle = () => {
-  const { battleId } = useParams();
+  const { battleCode } = useParams();
   const { getGames } = useGame();
+  const { getBattleByCode } = useBattle();
+  const { createMatch } = useMatch();
   const navigate = useNavigate();
   const [games, setGames] = React.useState<Array<Game>>([]);
+  const [battle, setBattle] = React.useState<BattleType | undefined>();
 
   // Load the games on initial render
   React.useEffect(() => {
@@ -19,15 +21,24 @@ const Battle = () => {
     });
   }, []);
 
+  // Load the games on initial render
+  React.useEffect(() => {
+    if (battleCode)
+      getBattleByCode(battleCode).then(b => {
+        setBattle(b);
+      });
+  }, []);
+
   return (
     <Box>
       <Typography textAlign="center">
         Welcome to lobby{' '}
         <Typography
+          component="span"
           color="secondary"
           sx={{ fontWeight: 600, display: 'inline' }}
         >
-          {battleId}
+          {battleCode}
         </Typography>
         , select a game below to start a new game.
       </Typography>
@@ -40,9 +51,10 @@ const Battle = () => {
           justifyContent="center"
           sx={{ my: 1, pb: 2 }}
         >
-          {games.length > 0
+          {battleCode && games.length > 0
             ? games.map(g => (
                 <Grid
+                  key={g.id}
                   item
                   sm={2}
                   display="flex"
@@ -54,7 +66,13 @@ const Battle = () => {
                     variant="contained"
                     sx={{ height: '5rem', width: '8rem' }}
                     onClick={() => {
-                      navigate(`${game}/${g.slug}/${generateNewCode(4)}`);
+                      if (battle?.id) {
+                        createMatch(battle.id, g.id).then(m => {
+                          navigate(
+                            `${game}/${battleCode}/${g.slug}/${m.matchCode}`,
+                          );
+                        });
+                      }
                     }}
                   >
                     {g.name}
@@ -65,6 +83,7 @@ const Battle = () => {
                 .map(x => x + 1)
                 .map(g => (
                   <Grid
+                    key={g}
                     item
                     sm={2}
                     display="flex"

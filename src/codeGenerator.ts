@@ -1,5 +1,5 @@
 export const battleCodeLength = 8;
-export const gameCodeLength = 4;
+export const matchCodeLength = 4;
 export const generateNewCode = (length: number) => {
   // Declare all characters
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

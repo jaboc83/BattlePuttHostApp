@@ -1,13 +1,13 @@
 import { Box, Link, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGame } from '../hooks';
+import { useGame, useMatch } from '../hooks';
 import * as React from 'react';
 import { Game as GameType } from '../api/game';
 import { start, clientUrl } from '../routes';
 import QRCode from 'react-qr-code';
 
 const Game = () => {
-  const { slug, code } = useParams();
+  const { slug, matchCode } = useParams();
   const { getGameBySlug } = useGame();
   const navigate = useNavigate();
   const [game, setGame] = React.useState<GameType | undefined>();
@@ -22,7 +22,8 @@ const Game = () => {
       navigate(start);
     }
   }, []);
-  const url = `${clientUrl}?code=${code}`;
+
+  const url = `${clientUrl}?code=${matchCode}`;
 
   return (
     <Box sx={{ margin: 'auto' }}>
@@ -31,7 +32,7 @@ const Game = () => {
       </Typography>
       <Typography align="center" gutterBottom width={400} margin="1em auto">
         Scan the QR code below with your phone or go to
-        <Typography color="secondary" display="inline-block">
+        <Typography component="span" color="secondary" display="inline-block">
           <Link
             sx={{ color: 'inherit', textDecoration: 'inherit' }}
             href={url}
@@ -66,7 +67,7 @@ const Game = () => {
         </Box>
       </Box>
       <Typography variant="h3" color="secondary" align="center">
-        {code}
+        {matchCode}
       </Typography>
       <Typography
         variant="h5"

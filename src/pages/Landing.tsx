@@ -1,10 +1,12 @@
 import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { battleCodeLength, generateNewCode } from '../codeGenerator';
+import { useBattle } from '../hooks';
 import { battle, rejoin } from '../routes';
 
 const Landing = () => {
   const navigate = useNavigate();
+  const { createBattle } = useBattle();
+
   return (
     <Box
       sx={{
@@ -24,7 +26,13 @@ const Landing = () => {
               variant="contained"
               sx={{ height: '5rem', width: '8rem' }}
               onClick={() => {
-                navigate(`${battle}/${generateNewCode(battleCodeLength)}`);
+                createBattle()
+                  .then(b => {
+                    navigate(`${battle}/${b.battleCode}`);
+                  })
+                  .catch(err => {
+                    console.error(err);
+                  });
               }}
             >
               New

@@ -29,8 +29,11 @@ root.render(
             <Route index element={<Navigate to={start} />} />
             <Route path={start} element={<Landing />} />
             <Route path={rejoin} element={<ReJoinLanding />} />
-            <Route path={`${battle}/:battleId`} element={<Battle />} />
-            <Route path={`${game}/:slug/:code`} element={<Game />} />
+            <Route path={`${battle}/:battleCode`} element={<Battle />} />
+            <Route
+              path={`${game}/:battleCode/:slug/:matchCode`}
+              element={<Game />}
+            />
           </Route>
         </Routes>
       </BrowserRouter>

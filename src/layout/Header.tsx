@@ -17,7 +17,7 @@ const Header = () => (
             sx={{ fontWeight: 500 }}
             align="center"
           >
-            Battle Putt
+            Battle Putt Host
           </Typography>
         </Link>
       </Toolbar>

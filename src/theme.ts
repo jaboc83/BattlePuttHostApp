@@ -4,10 +4,10 @@ export const themeOptions: ThemeOptions = {
   palette: {
     mode: 'dark',
     primary: {
-      main: '#0e9dd9',
+      main: '#f672c6',
     },
     secondary: {
-      main: '#f672c6',
+      main: '#0e9dd9',
     },
     background: {
       default: '#19171c',
