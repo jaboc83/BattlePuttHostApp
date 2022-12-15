@@ -22,7 +22,7 @@ const Game = () => {
       navigate(start);
     }
   }, []);
-  const url = `${clientUrl}/${game?.slug}/${code}`;
+  const url = `${clientUrl}?code=${code}`;
 
   return (
     <Box sx={{ margin: 'auto' }}>
