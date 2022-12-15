@@ -32,7 +32,12 @@ const Game = () => {
       <Typography align="center" gutterBottom width={400} margin="1em auto">
         Scan the QR code below with your phone or go to
         <Typography color="secondary" display="inline-block">
-          <Link sx={{ color: 'inherit', textDecoration: 'inherit' }} href={url}>
+          <Link
+            sx={{ color: 'inherit', textDecoration: 'inherit' }}
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {url}
           </Link>
         </Typography>
