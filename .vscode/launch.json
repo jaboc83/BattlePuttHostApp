@@ -8,7 +8,6 @@
       "type": "node",
       "request": "launch",
       "name": "Run Host App",
-      "localRoot": "${workspaceFolder}",
       "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**"],
       "runtimeArgs": ["run-script", "start"],

@@ -1,16 +1,19 @@
-import { ThemeOptions } from "@mui/material";
+import { ThemeOptions } from '@mui/material';
 
 export const themeOptions: ThemeOptions = {
   palette: {
-    mode: "dark",
+    mode: 'dark',
     primary: {
-      main: "#602080"
+      main: '#0e9dd9',
     },
     secondary: {
-      main: "#5bc8af"
-    }
+      main: '#f672c6',
+    },
+    background: {
+      default: '#19171c',
+    },
   },
   typography: {
-    fontFamily: "Roboto"
-  }
+    fontFamily: 'Roboto',
+  },
 };

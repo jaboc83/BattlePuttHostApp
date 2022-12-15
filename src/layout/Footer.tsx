@@ -1,16 +1,18 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from '@mui/material';
 
 const Footer = () => {
   return (
-    <Typography
-      component={"footer"}
-      variant="body2"
-      color="text.secondary"
-      align="center"
-    >
-      {"Copyright © Jake Moening "}
-      {new Date().getFullYear()}.
-    </Typography>
+    <Box sx={{ mt: 2 }}>
+      <Typography
+        component={'footer'}
+        variant="body2"
+        color="text.secondary"
+        align="center"
+      >
+        {'Copyright © Jake Moening '}
+        {new Date().getFullYear()}.
+      </Typography>
+    </Box>
   );
 };
 
