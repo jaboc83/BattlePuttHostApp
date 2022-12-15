@@ -44,7 +44,11 @@ const Game = () => {
         </Typography>
       </Typography>
       <Box
-        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
       >
         <Box
           sx={{

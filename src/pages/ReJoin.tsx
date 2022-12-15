@@ -28,7 +28,8 @@ const ReJoinLanding = () => {
           }}
         >
           <form
-            onSubmit={() => {
+            onSubmit={e => {
+              e.preventDefault();
               navigate(`${battle}/${code}`);
             }}
           >
