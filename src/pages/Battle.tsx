@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Game } from '../api';
 import { game } from '../routes';
-import { useGame } from '../hooks/useGame';
+import { useGame } from '../hooks';
 import { generateNewCode } from '../codeGenerator';
 
 const Battle = () => {
