@@ -1,11 +1,10 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGame } from '../hooks/useGame';
 import * as React from 'react';
 import { Game as GameType } from '../api/game';
-import { start } from '../routes';
+import { start, clientUrl } from '../routes';
 import QRCode from 'react-qr-code';
-import { generateNewCode } from '../codeGenerator';
 
 const Game = () => {
   const { slug, code } = useParams();
@@ -23,6 +22,7 @@ const Game = () => {
       navigate(start);
     }
   }, []);
+  const url = `${clientUrl}/${game?.slug}/${code}`;
 
   return (
     <Box sx={{ margin: 'auto' }}>
@@ -30,12 +30,12 @@ const Game = () => {
         {game?.name}
       </Typography>
       <Typography align="center" gutterBottom width={400} margin="1em auto">
-        Scan the QR code below with your phone or go to https://xyz.com/ and
-        manually enter the{' '}
+        Scan the QR code below with your phone or go to
         <Typography color="secondary" display="inline-block">
-          code
-        </Typography>{' '}
-        below.
+          <Link sx={{ color: 'inherit', textDecoration: 'inherit' }} href={url}>
+            {url}
+          </Link>
+        </Typography>
       </Typography>
       <Box
         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
@@ -49,7 +49,7 @@ const Game = () => {
           }}
         >
           <QRCode
-            value={`https://google.com/${game?.slug}`}
+            value={url}
             size={128}
             style={{
               height: 'auto',
