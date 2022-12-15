@@ -5,4 +5,4 @@ export const start = '/start';
 export const clientUrl =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3002/BattlePuttClientApp'
-    : 'https://github.com/jaboc83/BattlePuttClientApp';
+    : 'https://jaboc83.github.io/BattlePuttClientApp';
