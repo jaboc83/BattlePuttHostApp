@@ -7,7 +7,7 @@ export interface Battle {
   createdDateTime: Date;
 }
 
-const createBattle = async (battle: Battle) => {
+export const createBattle = async (battle: Battle) => {
   const results = await axios.post(`${apiBaseUrl}/api/battle`, battle);
   if (results.status === 201) {
     return results.data as Battle;
@@ -15,12 +15,10 @@ const createBattle = async (battle: Battle) => {
   throw new Error(results.data);
 };
 
-const fetchBattleByCode = async (battleCode: string) => {
+export const fetchBattleByCode = async (battleCode: string) => {
   const results = await axios.get(`${apiBaseUrl}/api/battle/s/${battleCode}`);
   if (results.status === 200) {
     return results.data as Battle;
   }
   throw new Error(results.data);
 };
-
-export { createBattle, fetchBattleByCode };

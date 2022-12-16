@@ -1,7 +1,7 @@
-import { createMatch } from '../api';
+import { createMatch, fetchMatchByCode, fetchMatch } from './../api';
 import { generateNewCode } from '../codeGenerator';
 
-const useMatch = () => {
+export const useMatch = () => {
   return {
     createMatch: (battleId: string, gameId: string) => {
       return createMatch({
@@ -11,7 +11,7 @@ const useMatch = () => {
         matchCreated: new Date(),
       });
     },
+    getMatch: fetchMatch,
+    getMatchByCode: fetchMatchByCode,
   };
 };
-
-export { useMatch };

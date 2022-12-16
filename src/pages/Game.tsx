@@ -5,12 +5,16 @@ import * as React from 'react';
 import { Game as GameType } from '../api/game';
 import { start, clientUrl } from '../routes';
 import QRCode from 'react-qr-code';
+import { useInterval } from '../hooks';
+import { Match } from '../api';
 
 const Game = () => {
   const { slug, matchCode } = useParams();
   const { getGameBySlug } = useGame();
+  const { getMatch, getMatchByCode } = useMatch();
   const navigate = useNavigate();
   const [game, setGame] = React.useState<GameType | undefined>();
+  const [match, setMatch] = React.useState<Match | undefined>();
 
   // Load data
   React.useEffect(() => {
@@ -21,7 +25,20 @@ const Game = () => {
     } else {
       navigate(start);
     }
+
+    if (matchCode) {
+      getMatchByCode(matchCode).then(m => {
+        setMatch(m);
+      });
+    }
   }, []);
+
+  useInterval(async () => {
+    if (match?.id) {
+      const m = await getMatch(match.id);
+      setMatch(m);
+    }
+  }, 5000);
 
   const url = `${clientUrl}?code=${matchCode}`;
 
@@ -73,12 +90,28 @@ const Game = () => {
       <Typography variant="h3" color="secondary" align="center">
         {matchCode}
       </Typography>
-      <Typography
-        variant="h5"
-        align="center"
-        sx={{ my: 2, fontStyle: 'italic' }}
-      >
-        Waiting for players...
+      <Typography variant="h6" align="center" sx={{ my: 2 }}>
+        {match?.players
+          ? match?.players.map(p => (
+              <Typography
+                key={p.playerUsername}
+                color="primary"
+                sx={{ fontStyle: 'italic' }}
+              >
+                {p.playerUsername}{' '}
+                {match.hostPlayerUsername == p.playerUsername
+                  ? ' is the host.'
+                  : ' is connected.'}
+              </Typography>
+            ))
+          : 'Waiting for players...'}
+      </Typography>
+      <Typography align="center">
+        {match?.players?.length != null &&
+        game &&
+        match.players.length >= game.minNumberOfPlayers
+          ? 'Waiting for host to start the game...'
+          : ''}
       </Typography>
     </Box>
   );

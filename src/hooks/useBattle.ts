@@ -1,7 +1,7 @@
 import { generateNewCode } from './../codeGenerator';
 import { createBattle, fetchBattleByCode } from '../api';
 
-const useBattle = () => {
+export const useBattle = () => {
   return {
     createBattle: () =>
       createBattle({
@@ -11,5 +11,3 @@ const useBattle = () => {
     getBattleByCode: fetchBattleByCode,
   };
 };
-
-export { useBattle };

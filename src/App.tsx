@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="md">
+      <Container maxWidth="sm">
         <Header />
         <Container
           component={'main'}

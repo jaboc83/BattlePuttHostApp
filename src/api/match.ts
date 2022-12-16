@@ -1,21 +1,27 @@
 import axios from 'axios';
 import { apiBaseUrl } from './apiBase';
-import { Player } from './players';
+
+export interface MatchPlayer {
+  id?: string;
+  playerUsername?: string;
+  score?: number;
+  position?: number;
+}
 
 export interface Match {
   id?: string;
   gameId: string;
-  players?: Array<Player>;
+  players?: Array<MatchPlayer>;
   matchCreated?: Date;
   matchStart?: Date;
   matchComplete?: Date;
   matchCode: string;
-  hostPlayerId?: string;
+  hostPlayerUsername?: string;
   battleId: string;
   playersWhoConfirmedScore?: Array<string>;
 }
 
-const createMatch = async (match: Match) => {
+export const createMatch = async (match: Match) => {
   const results = await axios.post(`${apiBaseUrl}/api/match`, match);
   if (results.status === 201) {
     return results.data as Match;
@@ -23,4 +29,18 @@ const createMatch = async (match: Match) => {
   throw new Error(results.data);
 };
 
-export { createMatch };
+export const fetchMatch = async (id: string) => {
+  const results = await axios.get(`${apiBaseUrl}/api/match/${id}`);
+  if (results.status === 200) {
+    return results.data as Match;
+  }
+  throw new Error(results.data);
+};
+
+export const fetchMatchByCode = async (code: string) => {
+  const results = await axios.get(`${apiBaseUrl}/api/match/s/${code}`);
+  if (results.status === 200) {
+    return results.data as Match;
+  }
+  throw new Error(results.data);
+};
