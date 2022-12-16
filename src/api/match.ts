@@ -5,7 +5,6 @@ export interface MatchPlayer {
   id?: string;
   playerUsername?: string;
   score?: number;
-  position?: number;
 }
 
 export interface Match {
@@ -17,7 +16,7 @@ export interface Match {
   matchComplete?: Date;
   matchCode: string;
   hostPlayerUsername?: string;
-  battleId: string;
+  battleCode: string;
   playersWhoConfirmedScore?: Array<string>;
 }
 

@@ -11,9 +11,10 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Battle from './pages/Battle';
 import { themeOptions } from './theme';
-import { start, battle, rejoin, game } from './routes';
+import { start, battle, rejoin, game, knockout } from './routes';
 import ReJoinLanding from './pages/ReJoin';
 import Game from './pages/Game';
+import Knockout from './pages/Knockout';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -34,6 +35,7 @@ root.render(
               path={`${game}/:battleCode/:slug/:matchCode`}
               element={<Game />}
             />
+            <Route path={`${knockout}/:matchCode`} element={<Knockout />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -6,20 +6,15 @@ function App() {
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="sm">
-        <Header />
-        <Container
-          component={'main'}
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignContent: 'center',
-          }}
-        >
-          <Outlet />
-        </Container>
-        <Footer />
+      <Header />
+      <Container
+        maxWidth="sm"
+        sx={{ display: 'flex', flexDirection: 'column', mt: 1 }}
+        component={'main'}
+      >
+        <Outlet />
       </Container>
+      <Footer />
     </>
   );
 }

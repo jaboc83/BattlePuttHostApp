@@ -1,17 +1,17 @@
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Button, Link, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGame, useMatch } from '../hooks';
+import { useGame, useMatch, useWatchMatch } from '../hooks';
 import * as React from 'react';
 import { Game as GameType } from '../api/game';
-import { start, clientUrl } from '../routes';
+import { start, clientUrl, getRouteFromSlug } from '../routes';
 import QRCode from 'react-qr-code';
-import { useInterval } from '../hooks';
 import { Match } from '../api';
+import { textAlign } from '@mui/system';
 
 const Game = () => {
   const { slug, matchCode } = useParams();
   const { getGameBySlug } = useGame();
-  const { getMatch, getMatchByCode } = useMatch();
+  const { getMatchByCode } = useMatch();
   const navigate = useNavigate();
   const [game, setGame] = React.useState<GameType | undefined>();
   const [match, setMatch] = React.useState<Match | undefined>();
@@ -33,33 +33,37 @@ const Game = () => {
     }
   }, []);
 
-  useInterval(async () => {
-    if (match?.id) {
-      const m = await getMatch(match.id);
-      setMatch(m);
+  React.useEffect(() => {
+    if (match?.matchStart && slug) {
+      navigate(`${getRouteFromSlug(slug)}/${matchCode}`);
     }
-  }, 5000);
+  }, [match]);
+
+  useWatchMatch(match, setMatch);
 
   const url = `${clientUrl}?code=${matchCode}`;
 
   return (
     <Box sx={{ margin: 'auto' }}>
-      <Typography variant="h2" align="center" gutterBottom>
+      <Typography variant="h4" align="center" gutterBottom>
         {game?.name}
       </Typography>
-      <Typography align="center" gutterBottom width={400} margin="1em auto">
-        Scan the QR code below with your phone or go to
-        <Typography component="span" color="secondary" display="inline-block">
-          <Link
-            sx={{ color: 'inherit', textDecoration: 'inherit' }}
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {url}
-          </Link>
-        </Typography>
-      </Typography>
+      <Link
+        sx={{
+          color: 'inherit',
+          textDecoration: 'inherit',
+          textAlign: 'center',
+          display: 'block',
+          mb: 2,
+        }}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Button variant="contained" color="secondary">
+          Open in new Tab
+        </Button>
+      </Link>
       <Box
         sx={{
           display: 'flex',

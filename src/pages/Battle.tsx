@@ -67,7 +67,7 @@ const Battle = () => {
                     sx={{ height: '5rem', width: '8rem' }}
                     onClick={() => {
                       if (battle?.id) {
-                        createMatch(battle.id, g.id).then(m => {
+                        createMatch(battle.battleCode, g.id).then(m => {
                           navigate(
                             `${game}/${battleCode}/${g.slug}/${m.matchCode}`,
                           );

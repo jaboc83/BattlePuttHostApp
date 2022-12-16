@@ -3,9 +3,9 @@ import { generateNewCode } from '../codeGenerator';
 
 export const useMatch = () => {
   return {
-    createMatch: (battleId: string, gameId: string) => {
+    createMatch: (battleCode: string, gameId: string) => {
       return createMatch({
-        battleId,
+        battleCode,
         gameId,
         matchCode: generateNewCode(4),
         matchCreated: new Date(),
