@@ -8,8 +8,8 @@ export const useWatchMatch = (
 ) => {
   const { getMatch } = useMatch();
   useInterval(async () => {
-    if (match?.id) {
-      const m = await getMatch(match.id);
+    if (match?.matchId) {
+      const m = await getMatch(match.matchId, match.lastUpdate);
       setMatch(m);
     }
   }, 5000);

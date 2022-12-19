@@ -9,9 +9,9 @@ import { Match } from '../api';
 import { textAlign } from '@mui/system';
 
 const Game = () => {
-  const { slug, matchCode } = useParams();
-  const { getGameBySlug } = useGame();
-  const { getMatchByCode } = useMatch();
+  const { slug, matchId } = useParams();
+  const { getGame } = useGame();
+  const { getMatch } = useMatch();
   const navigate = useNavigate();
   const [game, setGame] = React.useState<GameType | undefined>();
   const [match, setMatch] = React.useState<Match | undefined>();
@@ -19,15 +19,15 @@ const Game = () => {
   // Load data
   React.useEffect(() => {
     if (slug) {
-      getGameBySlug(slug || '').then(g => {
+      getGame(slug || '').then(g => {
         setGame(g);
       });
     } else {
       navigate(start);
     }
 
-    if (matchCode) {
-      getMatchByCode(matchCode).then(m => {
+    if (matchId) {
+      getMatch(matchId).then(m => {
         setMatch(m);
       });
     }
@@ -35,13 +35,13 @@ const Game = () => {
 
   React.useEffect(() => {
     if (match?.matchStart && slug) {
-      navigate(`${getRouteFromSlug(slug)}/${matchCode}`);
+      navigate(`${getRouteFromSlug(slug)}/${matchId}`);
     }
   }, [match]);
 
   useWatchMatch(match, setMatch);
 
-  const url = `${clientUrl}?code=${matchCode}`;
+  const url = `${clientUrl}?matchId=${matchId}`;
 
   return (
     <Box sx={{ margin: 'auto' }}>
@@ -91,19 +91,16 @@ const Game = () => {
           />
         </Box>
       </Box>
-      <Typography variant="h3" color="secondary" align="center">
-        {matchCode}
-      </Typography>
       <Typography variant="h6" align="center" sx={{ my: 2 }}>
         {match?.players
           ? match?.players.map(p => (
               <Typography
-                key={p.playerUsername}
+                key={p.username}
                 color="primary"
                 sx={{ fontStyle: 'italic' }}
               >
-                {p.playerUsername}{' '}
-                {match.hostPlayerUsername == p.playerUsername
+                {p.username}{' '}
+                {match.hostPlayerUsername == p.username
                   ? ' is the host.'
                   : ' is connected.'}
               </Typography>

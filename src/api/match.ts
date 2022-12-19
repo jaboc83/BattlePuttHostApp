@@ -2,25 +2,29 @@ import axios from 'axios';
 import { apiBaseUrl } from './apiBase';
 
 export interface MatchPlayer {
-  id?: string;
-  playerUsername?: string;
-  score?: number;
+  username: string;
+  score: number;
 }
 
 export interface Match {
-  id?: string;
-  gameId: string;
-  players?: Array<MatchPlayer>;
-  matchCreated?: Date;
+  matchId: string;
+  battleCode: string;
+  gameSlug: string;
+  matchCode: string;
+  matchCreated: Date;
   matchStart?: Date;
   matchComplete?: Date;
-  matchCode: string;
+  players: Array<MatchPlayer>;
   hostPlayerUsername?: string;
-  battleCode: string;
-  playersWhoConfirmedScore?: Array<string>;
+  lastUpdate: Date;
 }
 
-export const createMatch = async (match: Match) => {
+export interface CreateMatch {
+  battleCode: string;
+  gameSlug: string;
+}
+
+export const createMatch = async (match: CreateMatch) => {
   const results = await axios.post(`${apiBaseUrl}/api/match`, match);
   if (results.status === 201) {
     return results.data as Match;
@@ -28,16 +32,12 @@ export const createMatch = async (match: Match) => {
   throw new Error(results.data);
 };
 
-export const fetchMatch = async (id: string) => {
-  const results = await axios.get(`${apiBaseUrl}/api/match/${id}`);
-  if (results.status === 200) {
-    return results.data as Match;
+export const fetchMatch = async (matchId: string, lastUpdate?: Date) => {
+  let url = `${apiBaseUrl}/api/match/${matchId}`;
+  if (lastUpdate) {
+    url += `?lastUpdate=${encodeURIComponent(lastUpdate.toString())}`;
   }
-  throw new Error(results.data);
-};
-
-export const fetchMatchByCode = async (code: string) => {
-  const results = await axios.get(`${apiBaseUrl}/api/match/s/${code}`);
+  const results = await axios.get(url);
   if (results.status === 200) {
     return results.data as Match;
   }

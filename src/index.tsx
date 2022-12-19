@@ -32,10 +32,10 @@ root.render(
             <Route path={rejoin} element={<ReJoinLanding />} />
             <Route path={`${battle}/:battleCode`} element={<Battle />} />
             <Route
-              path={`${game}/:battleCode/:slug/:matchCode`}
+              path={`${game}/:battleCode/:slug/:matchId`}
               element={<Game />}
             />
-            <Route path={`${knockout}/:matchCode`} element={<Knockout />} />
+            <Route path={`${knockout}/:matchId`} element={<Knockout />} />
           </Route>
         </Routes>
       </BrowserRouter>

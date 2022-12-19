@@ -1,17 +1,13 @@
-import { createMatch, fetchMatchByCode, fetchMatch } from './../api';
-import { generateNewCode } from '../codeGenerator';
+import { createMatch, fetchMatch } from './../api';
 
 export const useMatch = () => {
   return {
-    createMatch: (battleCode: string, gameId: string) => {
+    createMatch: (battleCode: string, gameSlug: string) => {
       return createMatch({
         battleCode,
-        gameId,
-        matchCode: generateNewCode(4),
-        matchCreated: new Date(),
+        gameSlug,
       });
     },
     getMatch: fetchMatch,
-    getMatchByCode: fetchMatchByCode,
   };
 };

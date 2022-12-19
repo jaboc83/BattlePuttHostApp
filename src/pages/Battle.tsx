@@ -54,7 +54,7 @@ const Battle = () => {
           {battleCode && games.length > 0
             ? games.map(g => (
                 <Grid
-                  key={g.id}
+                  key={g.slug}
                   item
                   sm={2}
                   display="flex"
@@ -62,14 +62,13 @@ const Battle = () => {
                   alignItems="center"
                 >
                   <Button
-                    key={g.id}
                     variant="contained"
                     sx={{ height: '5rem', width: '8rem' }}
                     onClick={() => {
-                      if (battle?.id) {
-                        createMatch(battle.battleCode, g.id).then(m => {
+                      if (battle?.battleCode) {
+                        createMatch(battle.battleCode, g.slug).then(m => {
                           navigate(
-                            `${game}/${battleCode}/${g.slug}/${m.matchCode}`,
+                            `${game}/${battleCode}/${g.slug}/${m.matchId}`,
                           );
                         });
                       }

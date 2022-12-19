@@ -1,13 +1,8 @@
-import { generateNewCode } from './../codeGenerator';
-import { createBattle, fetchBattleByCode } from '../api';
+import { createBattle, fetchBattle } from '../api';
 
 export const useBattle = () => {
   return {
-    createBattle: () =>
-      createBattle({
-        battleCode: generateNewCode(8),
-        createdDateTime: new Date(),
-      }),
-    getBattleByCode: fetchBattleByCode,
+    createBattle,
+    getBattleByCode: fetchBattle,
   };
 };

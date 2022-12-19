@@ -2,21 +2,20 @@ import axios from 'axios';
 import { apiBaseUrl } from './apiBase';
 
 export interface Battle {
-  id?: string;
   battleCode: string;
-  createdDateTime: Date;
+  battleCreated: Date;
 }
 
-export const createBattle = async (battle: Battle) => {
-  const results = await axios.post(`${apiBaseUrl}/api/battle`, battle);
+export const createBattle = async () => {
+  const results = await axios.post(`${apiBaseUrl}/api/battle`);
   if (results.status === 201) {
     return results.data as Battle;
   }
   throw new Error(results.data);
 };
 
-export const fetchBattleByCode = async (battleCode: string) => {
-  const results = await axios.get(`${apiBaseUrl}/api/battle/s/${battleCode}`);
+export const fetchBattle = async (battleCode: string) => {
+  const results = await axios.get(`${apiBaseUrl}/api/battle/${battleCode}`);
   if (results.status === 200) {
     return results.data as Battle;
   }

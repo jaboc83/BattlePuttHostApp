@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { battle } from '../routes';
-import { battleCodeLength } from '../codeGenerator';
 
 const ReJoinLanding = () => {
+  const battleCodeLength = 8;
   const [code, setCode] = React.useState<string | undefined>();
   const navigate = useNavigate();
   return (

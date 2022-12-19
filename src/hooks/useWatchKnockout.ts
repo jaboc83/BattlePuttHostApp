@@ -8,9 +8,9 @@ export const useWatchKnockout = (
 ) => {
   const { getKnockout } = useKnockout();
   useInterval(async () => {
-    if (knockout?.id) {
-      const m = await getKnockout(knockout.id);
+    if (knockout?.matchId) {
+      const m = await getKnockout(knockout.matchId);
       setMatch(m);
     }
-  }, 5000);
+  }, 2000);
 };
