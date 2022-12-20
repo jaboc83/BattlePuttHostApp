@@ -134,7 +134,12 @@ const KnockoutPage = () => {
       {knockout?.matchComplete ? (
         <>
           {knockout.players.length > 1 ? (
-            <Typography variant="h3" align="center" color="secondary">
+            <Typography
+              variant="h3"
+              align="center"
+              color="secondary"
+              marginBottom={2}
+            >
               {
                 knockout?.players?.sort(
                   (a, b) => (b?.score || 0) - (a?.score || 0),
