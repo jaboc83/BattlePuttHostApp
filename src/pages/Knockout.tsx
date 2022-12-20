@@ -176,6 +176,7 @@ const KnockoutPage = () => {
             const remainingPutters = knockout.remainingPutters[player.username];
             return (
               <Card
+                key={player.username}
                 sx={{
                   mx: 'auto',
                   marginBottom: 2,
