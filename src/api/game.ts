@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { apiBaseUrl } from './apiBase';
+import client, { apiBaseUrl } from './apiBase';
 
 export interface Game {
   name: string;
@@ -10,7 +9,7 @@ export interface Game {
 }
 
 export const fetchAllGames = async () => {
-  const results = await axios.get(`${apiBaseUrl}/api/game`);
+  const results = await client.get(`${apiBaseUrl}/api/game`);
   if (results.status === 200) {
     return results.data as Array<Game>;
   }
@@ -18,7 +17,7 @@ export const fetchAllGames = async () => {
 };
 
 export const fetchGame = async (slug: string) => {
-  const results = await axios.get(`${apiBaseUrl}/api/game/${slug}`);
+  const results = await client.get(`${apiBaseUrl}/api/game/${slug}`);
   if (results.status === 200) {
     return results.data as Game;
   }

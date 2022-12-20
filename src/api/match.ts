@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { apiBaseUrl } from './apiBase';
+import client, { apiBaseUrl } from './apiBase';
 
 export interface MatchPlayer {
   username: string;
@@ -25,7 +24,7 @@ export interface CreateMatch {
 }
 
 export const createMatch = async (match: CreateMatch) => {
-  const results = await axios.post(`${apiBaseUrl}/api/match`, match);
+  const results = await client.post(`${apiBaseUrl}/api/match`, match);
   if (results.status === 201) {
     return results.data as Match;
   }
@@ -35,9 +34,9 @@ export const createMatch = async (match: CreateMatch) => {
 export const fetchMatch = async (matchId: string, lastUpdate?: Date) => {
   let url = `${apiBaseUrl}/api/match/${matchId}`;
   if (lastUpdate) {
-    url += `?lastUpdate=${encodeURIComponent(lastUpdate.toString())}`;
+    url += `?lastUpdate=${encodeURIComponent(lastUpdate.toISOString())}`;
   }
-  const results = await axios.get(url);
+  const results = await client.get(url);
   if (results.status === 200) {
     return results.data as Match;
   }

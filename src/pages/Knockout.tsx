@@ -10,7 +10,7 @@ import {
   Slide,
   Typography,
 } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import * as React from 'react';
 import { Knockout } from '../api';
 import { useKnockout, useWatchKnockout } from '../hooks';
@@ -71,6 +71,7 @@ const Rules = ({
 
 const KnockoutPage = () => {
   const { matchId } = useParams();
+  const navigate = useNavigate();
   const { getKnockout } = useKnockout();
   const [knockout, setKnockout] = React.useState<Knockout | undefined>();
   const [showRules, setShowRules] = React.useState(false);
@@ -132,18 +133,20 @@ const KnockoutPage = () => {
       </Dialog>
       {knockout?.matchComplete ? (
         <>
-          <Typography variant="h3" align="center" color="secondary">
-            {knockout?.players
-              ?.sort((a, b) => (b?.score || 0) - (a?.score || 0))[0]
-              .username.toUpperCase()}{' '}
-            Wins!
-          </Typography>
+          {knockout.players.length > 1 ? (
+            <Typography variant="h3" align="center" color="secondary">
+              {knockout?.players
+                ?.sort((a, b) => (b?.score || 0) - (a?.score || 0))[0]
+                .username.toUpperCase()}{' '}
+              won!
+            </Typography>
+          ) : null}
           <Button
             color="secondary"
             size="large"
             variant="outlined"
             sx={{ width: '15rem', m: 'auto' }}
-            href={battle}
+            onClick={() => navigate(`${battle}/${knockout.battleCode}`)}
           >
             Play another game
           </Button>

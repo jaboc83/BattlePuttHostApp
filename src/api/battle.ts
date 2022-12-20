@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { apiBaseUrl } from './apiBase';
+import client, { apiBaseUrl } from './apiBase';
 
 export interface Battle {
   battleCode: string;
@@ -7,7 +6,7 @@ export interface Battle {
 }
 
 export const createBattle = async () => {
-  const results = await axios.post(`${apiBaseUrl}/api/battle`);
+  const results = await client.post(`${apiBaseUrl}/api/battle`);
   if (results.status === 201) {
     return results.data as Battle;
   }
@@ -15,7 +14,7 @@ export const createBattle = async () => {
 };
 
 export const fetchBattle = async (battleCode: string) => {
-  const results = await axios.get(`${apiBaseUrl}/api/battle/${battleCode}`);
+  const results = await client.get(`${apiBaseUrl}/api/battle/${battleCode}`);
   if (results.status === 200) {
     return results.data as Battle;
   }
