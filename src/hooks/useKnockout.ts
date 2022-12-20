@@ -1,4 +1,4 @@
-import { fetchKnockout, updateKnockout } from '../api';
+import { fetchKnockout } from '../api';
 
 export const useKnockout = () => {
   return {

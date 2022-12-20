@@ -11,10 +11,11 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Battle from './pages/Battle';
 import { themeOptions } from './theme';
-import { start, battle, rejoin, game, knockout } from './routes';
+import { start, battle, rejoin, game, knockout, fiftyPutts } from './routes';
 import ReJoinLanding from './pages/ReJoin';
 import Game from './pages/Game';
-import Knockout from './pages/Knockout';
+import Knockout from './pages/Knockout/Knockout';
+import FiftyPutts from './pages/FiftyPutts/FiftyPutts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -36,6 +37,7 @@ root.render(
               element={<Game />}
             />
             <Route path={`${knockout}/:matchId`} element={<Knockout />} />
+            <Route path={`${fiftyPutts}/:matchId`} element={<FiftyPutts />} />
           </Route>
         </Routes>
       </BrowserRouter>

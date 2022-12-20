@@ -7,67 +7,17 @@ import {
   DialogTitle,
   IconButton,
   Paper,
-  Slide,
   Typography,
 } from '@mui/material';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as React from 'react';
-import { Knockout } from '../api';
-import { useKnockout, useWatchKnockout } from '../hooks';
+import { Knockout } from '../../api';
+import { useKnockout, useWatchKnockout } from '../../hooks';
 import InfoIcon from '@mui/icons-material/Info';
 import CloseIcon from '@mui/icons-material/Close';
-import { TransitionProps } from '@mui/material/transitions';
-import { battle } from '../routes';
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement;
-  },
-  ref: React.Ref<unknown>,
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
-const Rules = ({
-  numberOfDiscs,
-  distance,
-}: {
-  numberOfDiscs: number;
-  distance: number;
-}) => (
-  <>
-    <Typography variant="h3" align="center" marginBottom={1}>
-      Knockout Rules
-    </Typography>
-    <Typography variant="body1" gutterBottom>
-      All players start with {numberOfDiscs} putters and a mark is made{' '}
-      {distance} feet from the basket.
-    </Typography>
-    <Typography variant="body1" gutterBottom>
-      Players take turns putting their putters from the specified mark. Each
-      player uses all of their remaining putters before moving to the next
-      player.
-    </Typography>
-    <Typography variant="body1" gutterBottom>
-      Each made putt is worth {distance} (distance from the basket) points. A
-      miss means that the putter is removed from that players available discs
-      for the remainder of the game.
-    </Typography>
-    <Typography variant="body1" gutterBottom>
-      Once a player has finished putting their remaining putters they should
-      mark the number of made putts on their app. Play will continue with the
-      next player.
-    </Typography>
-    <Typography variant="body1" gutterBottom>
-      Once a player has run out of discs they are removed from the putting
-      rotation for the remainder of the game.
-    </Typography>
-    <Typography variant="body1" gutterBottom>
-      Play continues until all players have run out of discs. The winner is the
-      person with the most points in the end.
-    </Typography>
-  </>
-);
+import { battle } from '../../routes';
+import SlideUpTransition from '../../layout/SlideUpTransition';
+import KnockoutRules from './KnockoutRules';
 
 const KnockoutPage = () => {
   const { matchId } = useParams();
@@ -107,7 +57,7 @@ const KnockoutPage = () => {
         onClose={() => {
           setShowRules(false);
         }}
-        TransitionComponent={Transition}
+        TransitionComponent={SlideUpTransition}
       >
         <Paper sx={{ m: 1, p: 2 }}>
           <DialogTitle sx={{ m: 0, p: 2 }}>
@@ -125,7 +75,7 @@ const KnockoutPage = () => {
               <CloseIcon />
             </IconButton>
           </DialogTitle>
-          <Rules
+          <KnockoutRules
             numberOfDiscs={Number(knockout?.numberOfDiscs)}
             distance={Number(knockout?.distance)}
           />
