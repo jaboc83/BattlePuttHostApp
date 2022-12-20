@@ -135,9 +135,11 @@ const KnockoutPage = () => {
         <>
           {knockout.players.length > 1 ? (
             <Typography variant="h3" align="center" color="secondary">
-              {knockout?.players
-                ?.sort((a, b) => (b?.score || 0) - (a?.score || 0))[0]
-                .username.toUpperCase()}{' '}
+              {
+                knockout?.players?.sort(
+                  (a, b) => (b?.score || 0) - (a?.score || 0),
+                )[0].username
+              }{' '}
               won!
             </Typography>
           ) : null}
