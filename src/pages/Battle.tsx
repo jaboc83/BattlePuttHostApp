@@ -49,7 +49,7 @@ const Battle = () => {
           columns={{ xs: 4, sm: 8, md: 10 }}
           alignItems="center"
           justifyContent="center"
-          sx={{ my: 1, pb: 2 }}
+          sx={{ my: 1, pb: 2, px: 2 }}
         >
           {battleCode && games.length > 0
             ? games.map(g => (
