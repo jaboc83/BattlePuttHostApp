@@ -12,6 +12,7 @@ export const clientUrl =
 export const getRouteFromSlug = (slug: string) => {
   const routeMap = new Map<string, string>();
   routeMap.set('knockout', knockout);
+  routeMap.set('fiftyputts', fiftyPutts);
 
   if (!routeMap.has(slug)) throw new Error(`invalid slug: ${slug}`);
   return routeMap.get(slug);

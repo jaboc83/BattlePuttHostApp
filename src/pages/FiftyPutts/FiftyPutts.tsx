@@ -106,6 +106,9 @@ const FiftyPuttsPage = () => {
           </Button>
         </>
       ) : null}
+      <Typography align="center" variant="h4" marginTop={1}>
+        Fifty Putts
+      </Typography>
       <Typography align="center" variant="h5" marginTop={1}>
         {`Current Distance: ${
           fiftyPutts?.distances[fiftyPutts?.currentStation]
@@ -137,9 +140,6 @@ const FiftyPuttsPage = () => {
                   <Typography variant="h5" color="primary">
                     {player.score} points
                   </Typography>
-                  {fiftyPutts.matchComplete ? null : (
-                    <Typography variant="h6">Something Interesting</Typography>
-                  )}
                 </CardContent>
               </Card>
             );
