@@ -1,7 +1,7 @@
 export const battle = '/battle';
 export const game = '/game';
 export const knockout = '/knockout';
-export const fiftyPutts = '/fiftyPutts';
+export const perfectPutt = '/perfectPutt';
 export const rejoin = '/rejoin';
 export const start = '/start';
 export const clientUrl =
@@ -12,7 +12,7 @@ export const clientUrl =
 export const getRouteFromSlug = (slug: string) => {
   const routeMap = new Map<string, string>();
   routeMap.set('knockout', knockout);
-  routeMap.set('fiftyputts', fiftyPutts);
+  routeMap.set('perfectputt', perfectPutt);
 
   if (!routeMap.has(slug)) throw new Error(`invalid slug: ${slug}`);
   return routeMap.get(slug);

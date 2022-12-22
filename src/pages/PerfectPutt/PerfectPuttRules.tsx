@@ -6,24 +6,34 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import * as React from 'react';
 
-const FiftyPuttsRules = () => (
+interface PerfectPuttRulesProps {
+  distances: Array<number>;
+  numberOfDiscs: number;
+}
+
+const PerfectPuttRules: React.FC<PerfectPuttRulesProps> = ({
+  distances,
+  numberOfDiscs,
+}) => (
   <>
     <Typography variant="h3" align="center" marginBottom={1}>
-      Fifty Putts Rules
+      Perfect Putt Rules
     </Typography>
     <Typography variant="body1" gutterBottom>
-      In Fifty Putts players each take turns putting 10 putts from 5 different
-      locations at progressively farther distances.
+      In Perfect Putt players each take turns putting {numberOfDiscs} putts from
+      5 different locations at progressively farther distances{' '}
+      {distances.map(d => `${d}'`).join(', ')}.
     </Typography>
     <Typography variant="body1" gutterBottom>
-      Players take turns at each station putting 10 discs and tracking their
-      score. At the end of the final station the player with the most points
-      wins.
+      Players take turns at each station putting their {numberOfDiscs} discs and
+      tracking their score. At the end of the final station the player with the
+      most points wins.
     </Typography>
     <Typography variant="body1" gutterBottom>
-      Putts made are worth one point and for each set of 10 putts there are a
-      number of bonus points outlined in the table below.
+      Putts made are worth one point and for each set of {numberOfDiscs} putts
+      there are a number of bonus points outlined in the table below.
     </Typography>
     <Table>
       <TableHead>
@@ -69,4 +79,4 @@ const FiftyPuttsRules = () => (
     </Table>
   </>
 );
-export default FiftyPuttsRules;
+export default PerfectPuttRules;

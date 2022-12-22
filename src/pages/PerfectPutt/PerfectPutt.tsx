@@ -11,33 +11,35 @@ import {
 } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as React from 'react';
-import { FiftyPutts } from '../../api';
-import { useFiftyPutts, useWatchFiftyPutts } from '../../hooks';
+import { PerfectPutt } from '../../api';
+import { usePerfectPutt, useWatchPerfectPutt } from '../../hooks';
 import InfoIcon from '@mui/icons-material/Info';
 import CloseIcon from '@mui/icons-material/Close';
 import { battle } from '../../routes';
 import SlideUpTransition from '../../layout/SlideUpTransition';
-import FiftyPuttsRules from './FiftyPuttsRules';
+import PerfectPuttRules from './PerfectPuttRules';
 
-const FiftyPuttsPage = () => {
+const PerfectPuttPage = () => {
   const { matchId } = useParams();
   const navigate = useNavigate();
-  const { getFiftyPutts } = useFiftyPutts();
-  const [fiftyPutts, setFiftyPutts] = React.useState<FiftyPutts | undefined>();
+  const { getPerfectPutt } = usePerfectPutt();
+  const [perfectPutt, setPerfectPutt] = React.useState<
+    PerfectPutt | undefined
+  >();
   const [showRules, setShowRules] = React.useState(false);
 
   // load the match
   React.useEffect(() => {
     const loadData = async () => {
       if (matchId) {
-        const fp = await getFiftyPutts(matchId);
-        setFiftyPutts(fp);
+        const pp = await getPerfectPutt(matchId);
+        setPerfectPutt(pp);
       }
     };
     loadData().catch(console.error);
   }, []);
 
-  useWatchFiftyPutts(fiftyPutts, setFiftyPutts);
+  useWatchPerfectPutt(perfectPutt, setPerfectPutt);
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', mt: 0 }}>
@@ -75,12 +77,15 @@ const FiftyPuttsPage = () => {
               <CloseIcon />
             </IconButton>
           </DialogTitle>
-          <FiftyPuttsRules />
+          <PerfectPuttRules
+            distances={perfectPutt?.distances || []}
+            numberOfDiscs={perfectPutt?.numberOfDiscs || 0}
+          />
         </Paper>
       </Dialog>
-      {fiftyPutts?.matchComplete ? (
+      {perfectPutt?.matchComplete ? (
         <>
-          {fiftyPutts.players.length > 1 ? (
+          {perfectPutt.players.length > 1 ? (
             <Typography
               variant="h3"
               align="center"
@@ -88,7 +93,7 @@ const FiftyPuttsPage = () => {
               marginBottom={2}
             >
               {
-                fiftyPutts?.players?.sort(
+                perfectPutt?.players?.sort(
                   (a, b) => (b?.score || 0) - (a?.score || 0),
                 )[0].username
               }{' '}
@@ -100,18 +105,18 @@ const FiftyPuttsPage = () => {
             size="large"
             variant="outlined"
             sx={{ width: '15rem', m: 'auto' }}
-            onClick={() => navigate(`${battle}/${fiftyPutts.battleCode}`)}
+            onClick={() => navigate(`${battle}/${perfectPutt.battleCode}`)}
           >
             Play another game
           </Button>
         </>
       ) : null}
       <Typography align="center" variant="h4" marginTop={1}>
-        Fifty Putts
+        Perfect Putt
       </Typography>
       <Typography align="center" variant="h5" marginTop={1}>
         {`Current Distance: ${
-          fiftyPutts?.distances[fiftyPutts?.currentStation]
+          perfectPutt?.distances[perfectPutt?.currentStation]
         }'`}
       </Typography>
       <Box
@@ -122,7 +127,7 @@ const FiftyPuttsPage = () => {
           mt: 1,
         }}
       >
-        {fiftyPutts?.players
+        {perfectPutt?.players
           ?.sort((a, b) => (b?.score || 0) - (a?.score || 0))
           .map(player => {
             return (
@@ -149,4 +154,4 @@ const FiftyPuttsPage = () => {
   );
 };
 
-export default FiftyPuttsPage;
+export default PerfectPuttPage;
