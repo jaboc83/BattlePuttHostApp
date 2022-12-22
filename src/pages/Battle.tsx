@@ -1,4 +1,12 @@
-import { Box, Button, Grid, Paper, Skeleton, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Grid,
+  Paper,
+  Skeleton,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import * as React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Game, Battle as BattleType } from '../api';
@@ -63,6 +71,7 @@ const Battle = () => {
                 >
                   <Button
                     variant="contained"
+                    disabled={!g.enabled}
                     sx={{ height: '5rem', width: '8rem' }}
                     onClick={() => {
                       if (battle?.battleCode) {

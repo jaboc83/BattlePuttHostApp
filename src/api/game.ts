@@ -6,6 +6,7 @@ export interface Game {
   minNumberOfPlayers: number;
   allowTeams: boolean;
   slug: string;
+  enabled: boolean;
 }
 
 export const fetchAllGames = async () => {
