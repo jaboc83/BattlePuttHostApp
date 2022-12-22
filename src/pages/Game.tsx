@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useGame, useMatch, useWatchMatch } from '../hooks';
 import * as React from 'react';
 import { Game as GameType } from '../api/game';
-import { start, clientUrl, getRouteFromSlug } from '../routes';
+import { start, clientUrl } from '../routes';
 import QRCode from 'react-qr-code';
 import { Match } from '../api';
 import { textAlign } from '@mui/system';
@@ -35,7 +35,7 @@ const Game = () => {
 
   React.useEffect(() => {
     if (match?.matchStart && slug) {
-      navigate(`${getRouteFromSlug(slug)}/${matchId}`);
+      navigate(`/${slug}/${matchId}`);
     }
   }, [match]);
 

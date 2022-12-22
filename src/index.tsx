@@ -11,11 +11,20 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Battle from './pages/Battle';
 import { themeOptions } from './theme';
-import { start, battle, rejoin, game, knockout, perfectPutt } from './routes';
+import {
+  start,
+  battle,
+  rejoin,
+  game,
+  knockout,
+  perfectPutt,
+  horse,
+} from './routes';
 import ReJoinLanding from './pages/ReJoin';
 import Game from './pages/Game';
-import Knockout from './pages/Knockout/Knockout';
-import PerfectPutt from './pages/PerfectPutt/PerfectPutt';
+import KnockoutPage from './pages/Knockout/KnockoutPage';
+import PerfectPuttPage from './pages/PerfectPutt/PerfectPuttPage';
+import HorsePage from './pages/Horse/HorsePage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -36,8 +45,12 @@ root.render(
               path={`${game}/:battleCode/:slug/:matchId`}
               element={<Game />}
             />
-            <Route path={`${knockout}/:matchId`} element={<Knockout />} />
-            <Route path={`${perfectPutt}/:matchId`} element={<PerfectPutt />} />
+            <Route path={`${knockout}/:matchId`} element={<KnockoutPage />} />
+            <Route
+              path={`${perfectPutt}/:matchId`}
+              element={<PerfectPuttPage />}
+            />
+            <Route path={`${horse}/:matchId`} element={<HorsePage />} />
           </Route>
         </Routes>
       </BrowserRouter>

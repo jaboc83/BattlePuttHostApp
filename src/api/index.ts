@@ -4,3 +4,4 @@ export * from './battle';
 export * from './match';
 export * from './perfectPutt';
 export * from './knockout';
+export * from './horse';
